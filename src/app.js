@@ -9,10 +9,35 @@ import projectRoutes from './routes/projectRoutes.js';
 
 const app = express();
 
-// Configure CORS based on FRONTEND_URL environment variable
-const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+// Configure CORS to allow multiple origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://pink-koala-801009.hostingersite.com'
+];
+
+if (process.env.FRONTEND_URL) {
+  const envOrigins = process.env.FRONTEND_URL.split(',')
+    .map(item => item.trim().replace(/\/$/, ''));
+  envOrigins.forEach(origin => {
+    if (origin && !allowedOrigins.includes(origin)) {
+      allowedOrigins.push(origin);
+    }
+  });
+}
+
 app.use(cors({
-  origin: allowedOrigin,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, postman)
+    if (!origin) return callback(null, true);
+    
+    const cleanedOrigin = origin.replace(/\/$/, '');
+    if (allowedOrigins.includes(cleanedOrigin)) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
   credentials: true
 }));
 
