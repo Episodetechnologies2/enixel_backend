@@ -2,35 +2,6 @@
 
 This is the standalone Node.js Express backend project for the Enixel website. It provides API endpoints for CMS administration, projects, categories, and profiles, and connects directly to the MySQL database.
 
-## Directory Structure
-
-```
-enixel_backend/
-├── src/
-│   ├── config/          # Connection settings (e.g. database connection pool)
-│   │   └── db.js
-│   ├── controllers/     # Route request handlers
-│   │   ├── authController.js
-│   │   ├── categoryController.js
-│   │   ├── profileController.js
-│   │   └── projectController.js
-│   ├── routes/          # Express route definitions
-│   │   ├── authRoutes.js
-│   │   ├── categoryRoutes.js
-│   │   ├── healthRoutes.js
-│   │   ├── profileRoutes.js
-│   │   └── projectRoutes.js
-│   ├── middleware/      # Global or route-specific middlewares (e.g. Multer)
-│   │   └── upload.js
-│   ├── utils/           # Shared helper functions
-│   │   └── helpers.js
-│   ├── app.js           # App configuration and route bindings
-│   └── server.js        # Main starting point (listens on PORT)
-├── .env                 # Secret environment variables (ignored in Git)
-├── .env.example         # Template for environment configuration
-├── .gitignore           # File/folder patterns to exclude from Git
-└── package.json         # Dependencies and start scripts
-```
 
 ## Setup & Running Locally
 
